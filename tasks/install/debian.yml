@@ -1,0 +1,15 @@
+---
+- name: add apt key
+  apt_key:
+    state: present
+    keyserver: pool.sks-keyservers.net
+    id: 569130E8CA20FBC4CB3FDE555898470A764B32C9
+
+- name: add apt repository
+  apt_repository:
+    repo: deb http://neilalexander.s3.eu-west-2.amazonaws.com/deb/ debian yggdrasil
+    state: present
+
+- name: install yggdrasil
+  apt:
+    name: yggdrasil

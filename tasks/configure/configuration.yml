@@ -1,0 +1,6 @@
+---
+- name: template configuration
+  template:
+    src: yggdrasil.conf.j2
+    dest: /etc/yggdrasil.conf
+  notify: restart yggdrasil

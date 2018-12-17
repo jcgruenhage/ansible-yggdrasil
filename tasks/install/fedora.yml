@@ -1,0 +1,21 @@
+---
+- name: add rpm key
+  rpm_key:
+    key: http://pool.sks-keyservers.net/pks/lookup?op=get&search=0x5898470A764B32C9
+
+- name: add yum repo
+  copy:
+    src: fedora/yggdrasil.repo
+    dest: /etc/yum.repos.d/yggdrasil.repo
+    owner: root
+    group: root
+
+- name: install yggdrasil
+  dnf:
+    name: yggdrasil
+  when: ansible_lsb.id is "Fedora"
+
+- name: install yggdrasil
+  yum:
+    name: yggdrasil
+  when: ansible_lsb.id is not "Fedora"

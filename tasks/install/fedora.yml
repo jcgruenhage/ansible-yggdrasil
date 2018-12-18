@@ -13,9 +13,9 @@
 - name: install yggdrasil
   dnf:
     name: yggdrasil
-  when: ansible_lsb.id is "Fedora"
+  when: ansible_lsb.id == "Fedora"
 
 - name: install yggdrasil
   yum:
     name: yggdrasil
-  when: ansible_lsb.id is not "Fedora"
+  when: ansible_lsb.id != "Fedora"

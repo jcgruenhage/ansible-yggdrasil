@@ -8,4 +8,7 @@
 - import_tasks: install/debian.yml
   when: ansible_lsb.id == "Debian" or ansible_lsb.id == "Ubuntu"
 
+- import_tasks: install/arch.yml
+  when: ansible_lsb.id == "Arch"
+  
 # TODO: Support more distros (and maybe even Windows one day)

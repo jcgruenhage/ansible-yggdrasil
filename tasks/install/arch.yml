@@ -1,0 +1,6 @@
+---
+- name: install yggdrasil
+  aur:
+    name: yggdrasil
+    upgrade: no
+  become: no

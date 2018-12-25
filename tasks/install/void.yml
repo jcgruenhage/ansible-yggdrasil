@@ -1,7 +1,7 @@
 ---
 - name: install yggdrasil
   xbps:
-    name: "{{ package }}"
+    name: "{{ item }}"
   loop:
     - yggdrasil
     - yggdrasilctl

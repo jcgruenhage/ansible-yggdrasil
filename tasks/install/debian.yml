@@ -1,4 +1,7 @@
 ---
+- name: install apt key deps
+  apt:
+    name: dirmngr
 - name: add apt key
   apt_key:
     state: present

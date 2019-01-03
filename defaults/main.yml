@@ -6,3 +6,8 @@ yggdrasil_peers: []
 yggdrasil_interface_peer_interfaces: []
 yggdrasil_allowed_encryption_keys: []
 yggdrasil_multicast_interfaces: [ ".*" ]
+yggdrasil_node_name: "{{ inventory_hostname }}"
+yggdrasil_node_info_privacy: false
+yggdrasil_node_info:
+  name: "{{ yggdrasil_node_name }}"
+  deployment: ansible

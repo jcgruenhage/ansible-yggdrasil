@@ -3,9 +3,9 @@
 yggdrasil_config_path: /etc/yggdrasil.conf
 yggdrasil_listen_address: "[::]:61216"
 yggdrasil_admin_listen_address: "unix:///var/run/yggdrasil.sock"
-yggdrasil_peers: []
+yggdrasil_extra_peers: []
+yggdrasil_ansible_peers: []
 yggdrasil_interface_peer_interfaces: []
-yggdrasil_allowed_encryption_keys: []
 yggdrasil_multicast_interfaces: [ ".*" ]
 yggdrasil_node_name: "{{ inventory_hostname }}"
 yggdrasil_node_info_privacy: false

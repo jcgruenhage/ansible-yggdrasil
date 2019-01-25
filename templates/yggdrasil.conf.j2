@@ -1,7 +1,11 @@
 {
   # Listen address for peer connections. Default is to listen for all
   # TCP connections over IPv4 and IPv6 with a random port.
-  Listen: "{{ yggdrasil_listen_address }}"
+  {% if yggdrasil_config_listen_address is defined %}
+    Listen: "{{ yggdrasil_config_listen_address }}"
+  {% else %}
+    Listen: "{{ yggdrasil_listen_address }}"
+  {% endif %}
 
   # Listen address for admin connections. Default is to listen for local
   # connections either on TCP/9001 or a UNIX socket depending on your
@@ -12,9 +16,18 @@
   # List of connection strings for static peers in URI format, e.g.
   # tcp://a.b.c.d:e or socks://a.b.c.d:e/f.g.h.i:j.
   Peers: [
-  	{% for peer in yggdrasil_peers %}
-	  "{{ peer }}",
+  	{% for peer in yggdrasil_extra_peers %}
+      {% if peer.listen_uri is defined %}
+        "{{ peer.listen_uri }}",
+	    {% endif %}
 	  {% endfor %}
+    {% for peer in yggdrasil_ansible_peers %}
+      {% if hostvars[peer] is defined %}
+        {% if hostvars[peer].yggdrasil_listen_address is defined %}
+          "{{ hostvars[peer].yggdrasil_listen_address }}",
+        {% endif %}
+      {% endif %}
+    {% endfor %}
   ]
 
   # List of connection strings for static peers in URI format, arranged
@@ -25,7 +38,7 @@
     {% for interface in yggdrasil_interface_peer_interfaces %}
     {{ interface.identifier }}: [
       {% for peer in interface.peers %}
-      "{{ peer }}",
+        "{{ peer }}",
       {% endfor %}
     ],
     {% endfor %}
@@ -40,9 +53,18 @@
   # connections from. If left empty/undefined then all connections
   # will be allowed by default.
   AllowedEncryptionPublicKeys: [
-  	{% for key in yggdrasil_allowed_encryption_keys %}
-	  "{{ key }}",
-	  {% endfor %}
+    {% for peer in yggdrasil_extra_peers %}
+      {% if peer.public_key is defined %}
+        "{{ peer.public_key }}",
+      {% endif %}
+    {% endfor %}
+    {% for peer in yggdrasil_ansible_peers %}
+      {% if hostvars[peer] is defined %}
+        {% if hostvars[peer].yggdrasil_encryption_public_key is defined %}
+          "{{ hostvars[peer].yggdrasil_encryption_public_key }}"
+        {% endif %}
+      {% endif %}
+    {% endfor %}
   ]
 
   # Your public encryption key. Your peers may ask you for this to put
@@ -65,7 +87,7 @@
   MulticastInterfaces:
   [
     {% for interface in yggdrasil_multicast_interfaces %}
-    {{ interface }}
+      {{ interface }}
     {% endfor %}
   ]
 

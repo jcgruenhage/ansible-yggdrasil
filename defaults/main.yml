@@ -1,5 +1,6 @@
 ---
 # defaults file for yggdrasil
+yggdrasil_config_path: /etc/yggdrasil.conf
 yggdrasil_listen_address: "[::]:61216"
 yggdrasil_admin_listen_address: "unix:///var/run/yggdrasil.sock"
 yggdrasil_peers: []

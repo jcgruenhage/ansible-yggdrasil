@@ -53,6 +53,7 @@
   # connections from. If left empty/undefined then all connections
   # will be allowed by default.
   AllowedEncryptionPublicKeys: [
+  {% if yggdrasil_limit_incoming_connections %}
   {% for peer in yggdrasil_extra_peers %}
   {% if peer.public_key is defined %}
   "{{ peer.public_key }}",
@@ -65,6 +66,7 @@
   {% endif %}
   {% endif %}
   {% endfor %}
+  {% endif %}
   ]
 
   # Your public encryption key. Your peers may ask you for this to put

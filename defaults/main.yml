@@ -9,6 +9,7 @@ yggdrasil_interface_peer_interfaces: []
 yggdrasil_multicast_interfaces: [ ".*" ]
 yggdrasil_node_name: "{{ inventory_hostname }}"
 yggdrasil_node_info_privacy: false
+yggdrasil_limit_incoming_connections: true
 yggdrasil_node_info:
   name: "{{ yggdrasil_node_name }}"
   deployment: ansible

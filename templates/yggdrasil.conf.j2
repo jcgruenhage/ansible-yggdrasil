@@ -1,11 +1,7 @@
 {
   # Listen address for peer connections. Default is to listen for all
   # TCP connections over IPv4 and IPv6 with a random port.
-  {% if yggdrasil_config_listen_address is defined %}
   Listen: "{{ yggdrasil_config_listen_address }}"
-  {% else %}
-  Listen: "{{ yggdrasil_listen_address }}"
-  {% endif %}
 
   # Listen address for admin connections. Default is to listen for local
   # connections either on TCP/9001 or a UNIX socket depending on your
